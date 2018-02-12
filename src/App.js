@@ -8,36 +8,45 @@ class App extends React.Component {
     constructor(props)
     {
         super(props);
-        this.state={
-            itemType:"All",
-            itemSubType:"All",
-            search:"All",
-            itemsInCart:[],
-            currentPage:"home",
-        };
+        this.state=this.getInitialState();
         this.changeType = this.changeType.bind(this);
         this.changeSearchText = this.changeSearchText.bind(this);
         this.addItemInCart = this.addItemInCart.bind(this);
         this.changeCurrentPage = this.changeCurrentPage.bind(this);
         this.updateItemsInCart = this.updateItemsInCart.bind(this);
     }
+    getInitialState() {
+        let state = JSON.parse(sessionStorage.getItem('appState' )) ||{
+            itemType:"All",
+            itemSubType:"All",
+            search:"All",
+            itemsInCart:[],
+            currentPage:"home"};
+
+
+        return state;
+    }
+    saveStateTosessionStorage(state) {
+        sessionStorage.setItem('appState',JSON.stringify(state));
+
+    }
     changeType(itemType,itemSubType)
     {
-        this.setState({itemType:itemType});
-        this.setState({itemSubType:itemSubType});
+        this.setState({itemType:itemType},()=>{this.saveStateTosessionStorage(this.state)});
+        this.setState({itemSubType:itemSubType},()=>{this.saveStateTosessionStorage(this.state)});
     }
     changeSearchText(currentSearch) {
-        this.setState({search:currentSearch});
+        this.setState({search:currentSearch},()=>{this.saveStateTosessionStorage(this.state)});
     }
     addItemInCart(itemToAdd){
-        this.setState(prevState =>{return {itemsInCart:[...prevState.itemsInCart,itemToAdd]}});
+        this.setState(prevState =>{return {itemsInCart:[...prevState.itemsInCart,itemToAdd]}},()=>{this.saveStateTosessionStorage(this.state)});
     }
     updateItemsInCart(itemsInCart)
     {
-        this.setState({itemsInCart:itemsInCart});
+        this.setState({itemsInCart:itemsInCart},()=>{this.saveStateTosessionStorage(this.state)});
     }
     changeCurrentPage(page){
-        this.setState({currentPage:page});
+        this.setState({currentPage:page},()=>{this.saveStateTosessionStorage(this.state)});
     }
   render() {
     return(

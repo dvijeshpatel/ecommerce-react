@@ -1,4 +1,4 @@
-import React from 'react';
+
 import ModelCategories from '../categories/modelCategories';
     let modelItems = [{
         itemId: 1,

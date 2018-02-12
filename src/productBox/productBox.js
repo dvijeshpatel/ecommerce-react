@@ -4,7 +4,8 @@ import modelItems from '../items/modelItems';
 import ProductItem from './productItem';
 import ItemModal from './itemModal';
 import CheckOutTable from '../checkout/checkOutTable';
-class ProductBox extends React.Component
+
+class ProductBox extends React.PureComponent
 {
     constructor(props)
     {
@@ -20,16 +21,16 @@ class ProductBox extends React.Component
         let elementType = event.target.dataset.type;
         console.log(event.target.dataset);
         console.log(this.props.itemsInCart);
-        if (elementType == 'addToCart') {
-            let itemId = event.target.dataset.itemId;
+        if (elementType === 'addToCart') {
+            let itemId = Number(event.target.dataset.itemId);
             console.log(itemId);
              let isItemPresent =
-                  this.props.itemsInCart.find(element=>element.item.itemId==itemId);
+                  this.props.itemsInCart.find(element=>element.item.itemId===itemId);
              if (isItemPresent) {
                   alert('Item is All ready in cart');
                   return;
               }
-              let itemToBePutInCart = modelItems.find(element=>element.itemId==itemId);
+              let itemToBePutInCart = modelItems.find(element=>element.itemId===itemId);
 
               let itemToAdd = {};
               itemToAdd.item = itemToBePutInCart;
@@ -40,33 +41,33 @@ class ProductBox extends React.Component
         }
     }
     showModal(event){
-        const itemId = event.currentTarget.dataset.id;
+        const itemId = Number(event.currentTarget.dataset.id);
         const item = modelItems.find((item)=>{
-            return item.itemId == itemId;
+            return item.itemId === itemId;
 
         });
         this.setState({modal:<ItemModal item={item} hideModal={this.hideModal}  onAddToCartButtonClickHandler={this.onAddToCartButtonClickHandler}/>});
 
     }
     hideModal(event){
-        if(event.target.className=="modal" || event.target.className=="close")
+        if(event.target.className==="modal" || event.target.className==="close")
         this.setState({modal:""});
     }
     render()
     {
-
+       console.log("Inside Product Render");
          let itemsToDisplay=modelItems;
-       if (this.props.itemType != "All") {
+       if (this.props.itemType !== "All") {
 
             itemsToDisplay = itemsToDisplay.filter((item)=>{
-                return item.itemType == this.props.itemType;
+                return item.itemType === Number(this.props.itemType);
 
         });
        }
 
-        if (this.props.itemSubType != 'All') {
+        if (this.props.itemSubType!== 'All') {
             itemsToDisplay = itemsToDisplay.filter((item)=> {
-                return item.itemSubType == this.props.itemSubType;
+                return item.itemSubType === Number(this.props.itemSubType);
                });
 
 
@@ -84,11 +85,11 @@ class ProductBox extends React.Component
 
 
        let contentInProductBox="";
-       if(this.props.currentPage=="home")
+       if(this.props.currentPage==="home")
        {
            contentInProductBox = allItems;
        }
-       else if(this.props.currentPage=="checkout")
+       else if(this.props.currentPage==="checkout")
        {
            contentInProductBox=<CheckOutTable itemsInCart={this.props.itemsInCart} updateItemsInCart={this.props.updateItemsInCart}/>;
        }

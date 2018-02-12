@@ -1,9 +1,10 @@
 import React from 'react';
-function Footer(props){
-    const returnElement =  <div className="footer" >
+
+function Footer(props) {
+    const returnElement = <div className="footer">
         <div className="mail-us">
-            <b>  Mail Us:</b> dvijeshpatel9@gmail.com<br/>
-            <b>  Call Us:</b> +91 8140476157<br/>
+            <b> Mail Us:</b> dvijeshpatel9@gmail.com<br/>
+            <b> Call Us:</b> +91 8140476157<br/>
         </div>
         <div className="office-address">
             Office Address: <br/>
@@ -18,4 +19,5 @@ function Footer(props){
     return returnElement;
 
 }
+
 export default Footer;

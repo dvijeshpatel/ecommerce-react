@@ -10,6 +10,7 @@ class SearchBar extends React.Component{
         let debounceTimer = setTimeout(function() {
 
         }, 500);*/
+        this.props.changeCurrentPage("home");
         console.log(event.target.value);
          if(!event.target.value)
          {

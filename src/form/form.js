@@ -1,18 +1,19 @@
 import React from 'react';
+
 class Form extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        const returnElement =<div className="form-wrapper">
+        const returnElement = <div className="form-wrapper">
             <form className="user-details">
                 <label className="form-title">User Details</label>
                 <label className="required-field">Full Name</label>
-                <input type="text" placeholder="Full name" name="fullName"  required/>
+                <input type="text" placeholder="Full name" name="fullName" required/>
 
                 <label className="required-field">Mobile number</label>
-                <input type="text" placeholder="Mobile no"  name="mobileNo" required/>
+                <input type="text" placeholder="Mobile no" name="mobileNo" required/>
                 <label className="required-field">Pin Code</label>
                 <input type="text" placeholder="Pincode" name="pinCode" required/>
                 <label className="required-field"> Address</label>
@@ -25,5 +26,6 @@ class Form extends React.Component {
         return returnElement;
     }
 }
+
 export default Form;
 
